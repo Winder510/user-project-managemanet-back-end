@@ -1,0 +1,76 @@
+.red {
+  border: 1px solid red;
+}
+
+.green {
+  border: 1px solid green;
+}
+
+.blue {
+  border: 1px solid blue;
+}
+
+.login-container {
+  background-color: #f0f2f5;
+  min-height: 100vh;
+  align-items: center;
+}
+.login-container .container {
+  transform: translateY(-50%);
+}
+.login-container .container .content-left {
+  max-width: 500px;
+}
+.login-container .container .content-left .brand {
+  color: #0866ff;
+  font-weight: 800;
+}
+.login-container .container .content-left .quick-login .heading-desc {
+  color: #606770;
+}
+.login-container .container .content-left .quick-login .list-acc .mem-acc {
+  width: 160px;
+  height: 190px;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #dddfe2;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 0 1px #dddfe2;
+}
+.login-container
+  .container
+  .content-left
+  .quick-login
+  .list-acc
+  .mem-acc
+  .img-acc {
+  width: 100%;
+  overflow: hidden;
+  border-top-right-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.login-container
+  .container
+  .content-left
+  .quick-login
+  .list-acc
+  .mem-acc:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 8px 5px #dddfe2;
+}
+.login-container .container .content-right {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 6px;
+}
+.login-container .container .content-right .brand {
+  color: #0866ff;
+  font-weight: 800;
+}
+.login-container .container .content-right .forgot-password {
+  text-decoration: none;
+}
+.login-container .container .content-right .forgot-password:hover {
+  text-decoration: underline;
+} /*# sourceMappingURL=main.css.map */
