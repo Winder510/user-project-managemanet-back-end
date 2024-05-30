@@ -7,7 +7,6 @@ const handleUserPage = async (req, res) => {
             users
         });
     } catch (err) {
-        console.error('Error fetching users:', err);
         return res.status(500).send('Internal Server Error');
     }
 }
