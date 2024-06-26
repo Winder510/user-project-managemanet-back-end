@@ -30,7 +30,7 @@ const handleLogin = async (req, res) => {
   try {
     let rawData = req.body;
     let data = await loginRegisterService.handleUserLogin(rawData);
-    if (data && data.DT && data.access_token) {
+    if (data && data.DT && data.DT.access_token) {
       res.cookie("jwt", data.DT.access_token, {
         httpOnly: true,
         maxAge: 60 * 60 * 1000,
@@ -50,6 +50,7 @@ const handleLogin = async (req, res) => {
     });
   }
 };
+
 module.exports = {
   handleRegister,
   handleLogin,

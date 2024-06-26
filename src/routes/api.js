@@ -13,6 +13,9 @@ const initApiRoutes = (app) => {
   // get - R , Post - c , put -u , delete- d
 
   router.all("*", checkUserJWT, checkPermission);
+
+  router.get("/account", UserController.getUserAccount); // check lai token moi lan refresh
+
   router.post("/register", ApiController.handleRegister);
   router.post("/login", ApiController.handleLogin);
   router.get("/user/read", UserController.readFunc); // de lay duoc page & limit sai req.querry

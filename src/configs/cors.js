@@ -10,6 +10,9 @@ const configCors = (app) => {
       "GET, POST, OPTIONS, PUT, PATCH, DELETE"
     );
     res.setHeader("Access-Control-Allow-Credentials", true);
+    if (req.method === "OPTIONS") {
+      return res.sendStatus(200);
+    }
     next();
   });
 };

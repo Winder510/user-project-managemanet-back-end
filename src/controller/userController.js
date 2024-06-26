@@ -76,10 +76,21 @@ const deleteFunc = async (req, res) => {
     });
   }
 };
-
+const getUserAccount = async (req, res) => {
+  console.log("req.user: ", req.user);
+  return res.status(200).json({
+    EM: "ok", //error message
+    EC: 0, //eroor code
+    DT: {
+      access_token: req.token,
+      ...req.user,
+    }, //data
+  });
+};
 module.exports = {
   readFunc,
   createFunc,
   updateFunc,
   deleteFunc,
+  getUserAccount,
 };
