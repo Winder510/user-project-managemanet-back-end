@@ -5,14 +5,14 @@ const readFunc = async (req, res) => {
     if (req.query.page && req.query.limit) {
       let page = req.query.page;
       let limit = req.query.limit;
-      let data = await UserApiService.getUserWithPagination(+page, +limit);
+      let data = await roleApiService.getRoleWithPagination(+page, +limit);
       return res.status(200).json({
         EM: data.EM, //error message
         EC: data.EC, //eroor code
         DT: data.DT, //data
       });
     } else {
-      let data = await UserApiService.getAllUser();
+      let data = await roleApiService.getAllUser();
       return res.status(200).json({
         EM: data.EM, //error message
         EC: data.EC, //eroor code
@@ -62,8 +62,8 @@ const updateFunc = async (req, res) => {
 };
 const deleteFunc = async (req, res) => {
   try {
-    console.log(req.body);
-    let data = await UserApiService.deleteUser(req.body.id);
+    console.log("req.body.id, ", req.body.id);
+    let data = await roleApiService.deleteRole(req.body.id);
     return res.status(200).json({
       EM: data.EM, //error message
       EC: data.EC, //eroor code

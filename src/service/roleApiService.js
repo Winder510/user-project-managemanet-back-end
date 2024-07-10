@@ -29,6 +29,58 @@ const createNewRoles = async (roles) => {
     };
   }
 };
+const getRoleWithPagination = async (page, limit) => {
+  try {
+    let offset = (page - 1) * limit;
+    let { count, rows } = await db.Role.findAndCountAll({
+      offset: offset,
+      limit: +limit,
+      attributes: ["id", "url", "description"],
+    });
+    const plainRows = rows.map((row) => row.get({ plain: true }));
+
+    let totalPages = Math.ceil(+count / +limit);
+    let data = {
+      totalRows: count,
+      totalPages,
+      data: plainRows,
+    };
+
+    return {
+      EM: "success", //error message
+      EC: 0, //eroor code
+      DT: data, //data
+    };
+  } catch (e) {
+    return {
+      EM: "Error from server", //error message
+      EC: "-1", //eroor code
+      DT: "", //data
+    };
+  }
+};
+const deleteRole = async (id) => {
+  try {
+    await db.Role.destroy({
+      where: {
+        id: id,
+      },
+    });
+    return {
+      EM: "delete success", //error message
+      EC: "0", //eroor code
+      DT: "", //data
+    };
+  } catch (e) {
+    return {
+      EM: "Error from server", //error message
+      EC: "-1", //eroor code
+      DT: "", //data
+    };
+  }
+};
 module.exports = {
   createNewRoles,
+  getRoleWithPagination,
+  deleteRole,
 };

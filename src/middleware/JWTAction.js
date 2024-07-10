@@ -9,11 +9,9 @@ const createJWT = (payload) => {
     let token = jwt.sign(payload, key, {
       expiresIn: process.env.JWT_EXPIRESIN,
     });
-    console.log(token);
+
     return token;
-  } catch (e) {
-    console.log(e);
-  }
+  } catch (e) {}
 
   return "";
 };
@@ -60,7 +58,7 @@ const checkPermission = (req, res, next) => {
     let email = req.user.email;
     let roles = req.user.groupWithRole.Roles;
     let currentUrl = req.path;
-    console.log(req.path);
+
     if (roles && roles.length === 0) {
       return res.status(403).json({
         EC: -1,

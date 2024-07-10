@@ -10,7 +10,7 @@ const initApiRoutes = (app) => {
   // rest api
   // get - R , Post - c , put -u , delete- d
 
-  router.all("*", checkUserJWT, checkPermission);
+  //router.all("*", checkUserJWT, checkPermission);
 
   router.get("/account", UserController.getUserAccount); // check lai token moi lan refresh
 

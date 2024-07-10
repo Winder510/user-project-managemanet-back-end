@@ -16,3 +16,4 @@ const initWebRoutes = (app) => {
   return app.use("/", router);
 };
 export default initWebRoutes;
+  

@@ -61,7 +61,6 @@ const updateFunc = async (req, res) => {
 };
 const deleteFunc = async (req, res) => {
   try {
-    console.log(req.body);
     let data = await UserApiService.deleteUser(req.body.id);
     return res.status(200).json({
       EM: data.EM, //error message
@@ -77,7 +76,6 @@ const deleteFunc = async (req, res) => {
   }
 };
 const getUserAccount = async (req, res) => {
-  console.log("req.user: ", req.user);
   return res.status(200).json({
     EM: "ok", //error message
     EC: 0, //eroor code
