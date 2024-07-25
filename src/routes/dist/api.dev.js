@@ -24,7 +24,7 @@ var router = _express["default"].Router();
 var initApiRoutes = function initApiRoutes(app) {
   // rest api
   // get - R , Post - c , put -u , delete- d
-  //router.all("*", checkUserJWT, checkPermission);
+  router.all("*", _JWTAction.checkUserJWT, _JWTAction.checkPermission);
   router.get("/account", _userController["default"].getUserAccount); // check lai token moi lan refresh
 
   router.post("/register", _apiController["default"].handleRegister);
@@ -40,7 +40,9 @@ var initApiRoutes = function initApiRoutes(app) {
   router.get("/role/read", _RoleController["default"].readFunc);
   router.post("/role/create", _RoleController["default"].createFunc);
   router.put("/role/update", _RoleController["default"].updateFunc);
-  router["delete"]("/role/delete", _RoleController["default"].deleteFunc); // group
+  router["delete"]("/role/delete", _RoleController["default"].deleteFunc);
+  router.get("/role/by-group/:groupId", _RoleController["default"].getRolesByGroup);
+  router.post("/role/assign-to-group", _RoleController["default"].assignRoleToGroup); // group
 
   router.get("/group/read", _groupController["default"].readFunc);
   return app.use("/api/v1/", router);

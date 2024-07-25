@@ -18,7 +18,7 @@ const handleRegister = async (req, res) => {
       DT: "", //data
     });
   } catch (e) {
-    console.log(e);
+
     return res.status(500).json({
       EM: "Error from server", //error message
       EC: "-1", //eroor code

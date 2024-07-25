@@ -10,7 +10,7 @@ const initApiRoutes = (app) => {
   // rest api
   // get - R , Post - c , put -u , delete- d
 
-  //router.all("*", checkUserJWT, checkPermission);
+  router.all("*", checkUserJWT, checkPermission);
 
   router.get("/account", UserController.getUserAccount); // check lai token moi lan refresh
 
@@ -28,6 +28,8 @@ const initApiRoutes = (app) => {
   router.post("/role/create", RoleController.createFunc);
   router.put("/role/update", RoleController.updateFunc);
   router.delete("/role/delete", RoleController.deleteFunc);
+  router.get("/role/by-group/:groupId", RoleController.getRolesByGroup);
+  router.post("/role/assign-to-group", RoleController.assignRoleToGroup);
   // group
   router.get("/group/read", groupController.readFunc);
   return app.use("/api/v1/", router);

@@ -1,5 +1,7 @@
 "use strict";
 
+var _lodash = require("lodash");
+
 var _index = _interopRequireDefault(require("../models/index"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -177,8 +179,173 @@ var deleteRole = function deleteRole(id) {
   }, null, null, [[0, 6]]);
 };
 
+var getAllRole = function getAllRole() {
+  var roles, plainRows;
+  return regeneratorRuntime.async(function getAllRole$(_context4) {
+    while (1) {
+      switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          _context4.next = 3;
+          return regeneratorRuntime.awrap(_index["default"].Role.findAll({
+            attributes: ["id", "url", "description"]
+          }));
+
+        case 3:
+          roles = _context4.sent;
+          plainRows = roles.map(function (row) {
+            return row.get({
+              plain: true
+            });
+          });
+          return _context4.abrupt("return", {
+            EM: "Get list success",
+            //error message
+            EC: "0",
+            //eroor code
+            DT: plainRows //data
+
+          });
+
+        case 8:
+          _context4.prev = 8;
+          _context4.t0 = _context4["catch"](0);
+          return _context4.abrupt("return", {
+            EM: "Error from server",
+            //error message
+            EC: "-1",
+            //eroor code
+            DT: "" //data
+
+          });
+
+        case 11:
+        case "end":
+          return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+};
+
+var getRolesByGroupService = function getRolesByGroupService(id) {
+  var roles;
+  return regeneratorRuntime.async(function getRolesByGroupService$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+
+          if (id) {
+            _context5.next = 3;
+            break;
+          }
+
+          return _context5.abrupt("return", {
+            EM: "Not found any roles",
+            //error message
+            EC: "0",
+            //eroor code
+            DT: []
+          });
+
+        case 3:
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(_index["default"].Group.findOne({
+            where: {
+              id: id
+            },
+            attributes: ["id", "name", "description"],
+            include: [{
+              model: _index["default"].Role,
+              attributes: ["id", "url", "description"],
+              through: {
+                attributes: []
+              }
+            }]
+          }));
+
+        case 5:
+          roles = _context5.sent;
+          return _context5.abrupt("return", {
+            EM: "get success",
+            //error message
+            EC: "0",
+            //eroor code
+            DT: roles //data
+
+          });
+
+        case 9:
+          _context5.prev = 9;
+          _context5.t0 = _context5["catch"](0);
+          return _context5.abrupt("return", {
+            EM: "Error from server",
+            //error message
+            EC: "-1",
+            //eroor code
+            DT: []
+          });
+
+        case 12:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 9]]);
+};
+
+var assignRoleToGroupService = function assignRoleToGroupService(data) {
+  return regeneratorRuntime.async(function assignRoleToGroupService$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return regeneratorRuntime.awrap(_index["default"].Group_Role.destroy({
+            where: {
+              groupId: +data.groupId
+            }
+          }));
+
+        case 3:
+          _context6.next = 5;
+          return regeneratorRuntime.awrap(_index["default"].Group_Role.bulkCreate(data.groupRoles));
+
+        case 5:
+          return _context6.abrupt("return", {
+            EM: "Assign role success",
+            //error message
+            EC: "0",
+            //eroor code
+            DT: [] //data
+
+          });
+
+        case 8:
+          _context6.prev = 8;
+          _context6.t0 = _context6["catch"](0);
+          return _context6.abrupt("return", {
+            EM: "Error from server",
+            //error message
+            EC: "-1",
+            //eroor code
+            DT: "" //data
+
+          });
+
+        case 11:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+};
+
 module.exports = {
   createNewRoles: createNewRoles,
   getRoleWithPagination: getRoleWithPagination,
-  deleteRole: deleteRole
+  deleteRole: deleteRole,
+  getAllRole: getAllRole,
+  getRolesByGroupService: getRolesByGroupService,
+  assignRoleToGroupService: assignRoleToGroupService
 };

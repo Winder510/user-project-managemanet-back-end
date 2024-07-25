@@ -79,7 +79,7 @@ var checkPermission = function checkPermission(req, res, next) {
     }
 
     var canAcess = roles.some(function (item) {
-      return item.url === currentUrl;
+      return item.url === currentUrl || currentUrl.includes(item.url);
     });
 
     if (canAcess === true) {

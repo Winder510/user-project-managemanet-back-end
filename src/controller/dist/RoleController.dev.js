@@ -38,7 +38,7 @@ var readFunc = function readFunc(req, res) {
 
         case 10:
           _context.next = 12;
-          return regeneratorRuntime.awrap(_roleApiService["default"].getAllUser());
+          return regeneratorRuntime.awrap(_roleApiService["default"].getAllRole());
 
         case 12:
           _data = _context.sent;
@@ -164,11 +164,10 @@ var deleteFunc = function deleteFunc(req, res) {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          console.log("req.body.id, ", req.body.id);
-          _context4.next = 4;
+          _context4.next = 3;
           return regeneratorRuntime.awrap(_roleApiService["default"].deleteRole(req.body.id));
 
-        case 4:
+        case 3:
           data = _context4.sent;
           return _context4.abrupt("return", res.status(200).json({
             EM: data.EM,
@@ -179,8 +178,8 @@ var deleteFunc = function deleteFunc(req, res) {
 
           }));
 
-        case 8:
-          _context4.prev = 8;
+        case 7:
+          _context4.prev = 7;
           _context4.t0 = _context4["catch"](0);
           return _context4.abrupt("return", res.status(500).json({
             EM: "Error from server",
@@ -191,9 +190,93 @@ var deleteFunc = function deleteFunc(req, res) {
 
           }));
 
-        case 11:
+        case 10:
         case "end":
           return _context4.stop();
+      }
+    }
+  }, null, null, [[0, 7]]);
+};
+
+var getRolesByGroup = function getRolesByGroup(req, res) {
+  var id, data;
+  return regeneratorRuntime.async(function getRolesByGroup$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          id = req.params.groupId;
+          _context5.next = 4;
+          return regeneratorRuntime.awrap(_roleApiService["default"].getRolesByGroupService(id));
+
+        case 4:
+          data = _context5.sent;
+          return _context5.abrupt("return", res.status(200).json({
+            EM: data.EM,
+            //error message
+            EC: data.EC,
+            //eroor code
+            DT: data.DT //data
+
+          }));
+
+        case 8:
+          _context5.prev = 8;
+          _context5.t0 = _context5["catch"](0);
+          return _context5.abrupt("return", res.status(500).json({
+            EM: "Error from server",
+            //error message
+            EC: "-1",
+            //eroor code
+            DT: "" //data
+
+          }));
+
+        case 11:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 8]]);
+};
+
+var assignRoleToGroup = function assignRoleToGroup(req, res) {
+  var data;
+  return regeneratorRuntime.async(function assignRoleToGroup$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          console.log(req.body);
+          _context6.next = 4;
+          return regeneratorRuntime.awrap(_roleApiService["default"].assignRoleToGroupService(req.body));
+
+        case 4:
+          data = _context6.sent;
+          return _context6.abrupt("return", res.status(200).json({
+            EM: data.EM,
+            //error message
+            EC: data.EC,
+            //eroor code
+            DT: data.DT //data
+
+          }));
+
+        case 8:
+          _context6.prev = 8;
+          _context6.t0 = _context6["catch"](0);
+          return _context6.abrupt("return", res.status(500).json({
+            EM: "Error from server",
+            //error message
+            EC: "-1",
+            //eroor code
+            DT: "" //data
+
+          }));
+
+        case 11:
+        case "end":
+          return _context6.stop();
       }
     }
   }, null, null, [[0, 8]]);
@@ -203,5 +286,7 @@ module.exports = {
   readFunc: readFunc,
   createFunc: createFunc,
   updateFunc: updateFunc,
-  deleteFunc: deleteFunc
+  deleteFunc: deleteFunc,
+  getRolesByGroup: getRolesByGroup,
+  assignRoleToGroup: assignRoleToGroup
 };
